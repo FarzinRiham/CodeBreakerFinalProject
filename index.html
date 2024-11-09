@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        h1 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 70px;
+            background-color:black;
+            font-weight: bold;
+            color: rgb(0, 255, 0);
+            height: 70px;
+            text-align: center;
+        }
+
+        h2 {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 50px;
+            background-color:black;
+            font-weight: bold;
+            color: rgb(255, 0, 0);
+            height: 50px;
+            text-align: center;
+        }
+
+        body {
+            background: url(hacker.jpg);
+            background-size: cover;
+            color:chartreuse
+        }
+
+        #background-info {
+            background-color:black;
+            opacity: 70%;
+            color:greenyellow;
+            text-align: center;
+            font-size: 40px;
+            font-style: italic;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 100px;
+            text-align: center;
+        }
+
+        button {
+            height:80px;
+            width:120px;
+            margin:5px;
+            background-color:rgb(88, 255, 73);
+            color:black;
+            font-weight:bold;
+            font-size: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            align-self: center;
+            text-align: center;
+            margin-bottom: 5px;
+            display: block;
+            margin:auto;
+            transition: 2s;
+            opacity: 70%
+        }
+
+        .guessing:hover {
+            height:110px;
+            width:180px;
+            font-size:25px;
+            opacity: 100%;
+        }
+
+        #encouragement {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 30px;
+            background-color:black;
+            font-weight: bold;
+            color: rgb(0, 255, 38);
+            height: 30px;
+            text-align: center;
+        }
+
+        #clock {
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 30px;
+            background-color:black;
+            font-weight: bold;
+            color: rgb(255, 0, 0);
+            height: 30px;
+            text-align: center;
+        }
+
+        #holder {
+            max-width: 90%; 
+            margin: auto; 
+            border: 3px solid black;
+            border-radius: 10px;
+        }
+
+        #sound {
+            margin:auto;
+            height: 120px;
+            width: 120px;
+            background: url("soundSymbol.jpeg");
+        }
+    </style>
+    <title>Code Breaker</title>
+</head>
+<body>
+    <h1>Code Breaker</h1>
+    <h2>Guess the code or face the law!</h2>
+    <button id = "sound" onclick="play()"></button>
+    <div id = "background-info">
+        You're a really cool and epic hacker with a lot of rizz, and you're so skibidi at breaking into vaults all the time.
+        However, you find yourself lacking and then mess up the code, tripping the alarm and losing your aura as the police
+        comes over to absolutely demolish that booty. Will you rescue your aura and guess the code before the guesses run out or
+        will you lose your sigma status to a jail sentence?
+    </div>
+    <div id = holder>
+        <button class = "guessing" id = guess onclick="estimate()">Take a wise guess!</button>
+    </div>
+    <div id = encouragement></div>
+    <div id = clock></div>
+
+    <script>
+        var sound = document.createElement("audio");
+        let int1 = Math.floor(Math.random() * 1000);
+
+        let answer =  int1;
+
+        localStorage.setItem("code", answer);
+        console.log(localStorage.getItem("code")); //generates the answer
+
+        localStorage.setItem("guessCount", 7);
+        var time = document.getElementById("clock");
+        time.innerHTML = "Guesses left until the police arrives: " + localStorage.getItem("guessCount");
+        document.body.appendChild(time); //clock code
+
+        var text = document.getElementById("encouragement");
+        text.innerHTML = "Press the button to make a guess."
+        document.body.appendChild(text);
+        function play() {
+            sound.src="theme.mp3";
+            sound.loop = true;
+            sound.play();
+        }
+
+        function estimate () {
+            if (parseInt(localStorage.getItem("guessCount")) <= 0) {
+                sound.src="lose.mp3";
+                sound.loop = false;
+                sound.play();
+                let deathNumber = Math.floor(Math.random() * 10);
+                if (deathNumber == 1) {
+                    time.innerHTML = "Sorry, but you are out of guesses! The police got you and now you will rot in jail forever. Eventually one of the prisoners will shame you and kill you. Sucks." +
+                    " The correct answer is: " + localStorage.getItem("code");
+                }
+                if (deathNumber == 2) {
+                    time.innerHTML = "Yikes, you're out of guesses. Loser. Must suck because once you get to jail, you drop the soap bar and were never seen alive again." +
+                    " The correct answer is: " + localStorage.getItem("code");
+                }
+                if (deathNumber == 3) {
+                    time.innerHTML = "Out of guesses sucker. You got arrested and get negative aura. Not so skibidi now, are you?" +
+                    " The correct answer is: " + localStorage.getItem("code");
+                }
+                if (deathNumber == 4) {
+                    time.innerHTML = "You lost. After 10 years of being arrested, you go insane and develop an irrational fear of rats after being attacked by one in prison. Boo hoo." +
+                    " The correct answer is: " + localStorage.getItem("code");
+                }
+                if (deathNumber == 5) {
+                    time.innerHTML = "Wow. Skill issue. You go to prison and start halluicating nightmares about Mr. Irimina assigning more projects and you go absolutely ballistic. What a terrible fate." +
+                    " The correct answer is: " + localStorage.getItem("code");
+                }
+                if (deathNumber == 6) {
+                    time.innerHTML = "You suck so bad bro. Just give up on life." +
+                    " The correct answer is: " + localStorage.getItem("code");
+                }
+                if (deathNumber == 7) {
+                    time.innerHTML = "You got caught, but because people were so mad at you for being a terrible theif, they threw rocks at you like it was medival times and you died on the spot. Ouch." +
+                    " The correct answer is: " + localStorage.getItem("code");
+                }
+                if (deathNumber == 8) {
+                    time.innerHTML = "You got caught and arrested, and your jail buddy is now Marcus. Which sucks. I feel bad for you." +
+                    " The correct answer is: " + localStorage.getItem("code");
+                }
+                if (deathNumber == 9) {
+                    time.innerHTML = "You get arrested but then wake up in class to Mr Irimina's lecture, and you let out a sigh of relief. But then you realize school is basically a prison, so you start crying like a madman and get kicked out of the class and sent to the principal's office. Yikes." +
+                    " The correct answer is: " + localStorage.getItem("code");
+                }
+                document.body.appendChild(time); //clock code
+                document.getElementById("guess").remove();
+            } else {
+                let userGuess = prompt("Guess a number.");
+                if (userGuess == parseInt(localStorage.getItem("code"))) {
+                    document.getElementById("guess").remove();
+                    console.log("Nailed it!");
+                    text.innerHTML = "You're guess was " + userGuess + ". That is the correct code! Congradulations!!!";
+                    document.body.appendChild(text);
+                    sound.src="win.mp3";
+                    sound.loop = false;
+                    sound.play();
+                } else if (userGuess < parseInt(localStorage.getItem("code"))) {
+                    console.log("Higher!");
+                    text.innerHTML = "You're guess was " + userGuess + ". Guess higher!";
+                    document.body.appendChild(text);
+                } else if (userGuess > parseInt(localStorage.getItem("code"))) {
+                    console.log("Lower!");
+                    text.innerHTML = "You're guess was " + userGuess + ". Guess lower!";
+                    document.body.appendChild(text);
+                }
+                localStorage.setItem("guessCount", localStorage.getItem("guessCount")-1);
+                time.innerHTML = "Guesses left until the police arrives: " + localStorage.getItem("guessCount");
+                document.body.appendChild(time); //changes guesses left in clock   
+            }
+        }
+    </script>
+</body>
+</html>
